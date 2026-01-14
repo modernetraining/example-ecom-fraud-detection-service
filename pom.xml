@@ -18,6 +18,30 @@
     <spring-cloud.version>2021.0.9</spring-cloud.version>
   </properties>
 
+  <distributionManagement>
+    <repository>
+        <id>moderne-demo</id>
+        <name>Moderne Artifactory-releases</name>
+        <url>https://artifactory.moderne.ninja/artifactory/moderne-demo</url>
+    </repository>
+    <snapshotRepository>
+        <id>moderne-demo-snapshots</id>
+        <name>Moderne Artifactory-snapshots</name>
+        <url>https://artifactory.moderne.ninja/artifactory/moderne-demo</url>
+    </snapshotRepository>
+  </distributionManagement>
+
+  <repositories>
+    <repository>
+      <id>moderne-cache-3</id>
+      <url>https://artifactory.moderne.ninja/artifactory/moderne-cache-3</url>
+    </repository>
+    <repository>
+      <id>moderne-cache-3-snapshots</id>
+      <url>https://artifactory.moderne.ninja/artifactory/moderne-cache-3</url>
+    </repository>
+  </repositories>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
