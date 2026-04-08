@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.5.15</version>
+    <version>4.0.0</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
 
@@ -14,8 +14,8 @@
   <version>1.1.0-SNAPSHOT</version>
 
   <properties>
-    <java.version>1.8</java.version>
-    <spring-cloud.version>2020.0.6</spring-cloud.version>
+    <java.version>21</java.version>
+    <spring-cloud.version>2025.1.1</spring-cloud.version>
   </properties>
 
   <distributionManagement>
@@ -64,22 +64,33 @@
       <artifactId>spring-cloud-starter-openfeign</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-sleuth</artifactId>
+      <groupId>io.micrometer</groupId>
+      <artifactId>micrometer-tracing-bridge-brave</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-sleuth-zipkin</artifactId>
+      <groupId>io.zipkin.reporter2</groupId>
+      <artifactId>zipkin-reporter-brave</artifactId>
+    </dependency>
+    <!-- ecom-security 1.0.0 is incompatible with Spring Boot 4.0 (uses WebSecurityConfigurerAdapter).
+         Replace with spring-boot-starter-security + oauth2-resource-server and a local SecurityConfig. -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.example.ecom</groupId>
-      <artifactId>ecom-security</artifactId>
-      <version>1.0.0</version>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
     </dependency>
     <dependency>
       <groupId>com.example.ecom</groupId>
       <artifactId>ecom-rest-client</artifactId>
       <version>1.0.0</version>
+      <exclusions>
+        <exclusion>
+          <groupId>com.example.ecom</groupId>
+          <artifactId>ecom-security</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>com.example.ecom</groupId>
@@ -92,16 +103,11 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.junit.vintage</groupId>
-      <artifactId>junit-vintage-engine</artifactId>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-webmvc-test</artifactId>
       <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <groupId>org.hamcrest</groupId>
-          <artifactId>hamcrest-core</artifactId>
-        </exclusion>
-      </exclusions>
     </dependency>
+
   </dependencies>
 
   <build>
@@ -109,7 +115,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.1</version>
+        <version>3.13.0</version>
         <configuration>
           <proc>none</proc>  <!-- Let apt-maven-plugin handle it -->
         </configuration>

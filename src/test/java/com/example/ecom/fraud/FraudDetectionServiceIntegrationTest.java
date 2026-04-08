@@ -3,14 +3,12 @@ package com.example.ecom.fraud;
 import com.example.ecom.common.dto.ApiResponse;
 import com.example.ecom.fraud.client.KycClient;
 import com.example.ecom.fraud.client.RiskScoreClient;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -19,7 +17,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest(properties = {
         "KYC_SERVICE_URL=http://localhost:8081",
         "RISK_SCORE_SERVICE_URL=http://localhost:8082"
@@ -30,10 +27,10 @@ public class FraudDetectionServiceIntegrationTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
+    @MockitoBean
     private KycClient kycClient;
 
-    @MockBean
+    @MockitoBean
     private RiskScoreClient riskScoreClient;
 
     @Test
